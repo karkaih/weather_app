@@ -1,15 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weather_app/Json_package/weather_page1.dart';
 
 class DetailPage extends StatefulWidget {
+  Coord coord ;
+  String Name;
+  DetailPage(this.coord,this.Name);
   @override
   State<StatefulWidget> createState() {
-    return Detail_Page();
+    return Detail_Page(coord,Name);
   }
 }
 
 class Detail_Page extends State<DetailPage> {
+  Coord coord ;
+  String Name;
+  Detail_Page(this.coord,this.Name);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +41,7 @@ class Detail_Page extends State<DetailPage> {
                     height: 10.0.h,
                     child: Center(
                         child: Text(
-                      "5 Mar. 2021",
+                      coord.dt,
                       style: TextStyle(
                           color: Colors.black.withOpacity(0.6),
                           fontStyle: FontStyle.italic,
@@ -50,7 +57,7 @@ class Detail_Page extends State<DetailPage> {
                   width: 50.0.w,
                   height: 25.0.h,
                   child: Image(
-                    image: AssetImage("assets/d01d.png"),
+                    image: AssetImage("assets/d"+coord.Icon+".png"),
                     fit: BoxFit.fill,
                   ),
                 )),
@@ -61,7 +68,7 @@ class Detail_Page extends State<DetailPage> {
       width: 100.0.w,
       height: 10.0.h,
       child: Column(
-      children: [Expanded(child: Text ("Clear Sky", style: TextStyle(fontSize: 25))) ,],
+      children: [Expanded(child: Text (coord.Description, style: TextStyle(fontSize: 25))) ,],
     ),)),
             Positioned(
               bottom: 20.0.h,
@@ -97,13 +104,13 @@ class Detail_Page extends State<DetailPage> {
                     ),
                     TableRow(children: [
                       TableCell(
-                          child: Text("19°C", style: TextStyle(fontSize: 15))),
+                          child: Text( coord.Max.toString()+" °C", style: TextStyle(fontSize: 15))),
                       TableCell(
-                          child: Text("19°C", style: TextStyle(fontSize: 15))),
+                          child: Text(coord.Min.toString()+" °C", style: TextStyle(fontSize: 15))),
                       TableCell(
-                          child: Text("19°C", style: TextStyle(fontSize: 15))),
+                          child: Text(coord.Evening.toString()+" °C", style: TextStyle(fontSize: 15))),
                       TableCell(
-                          child: Text("19°C", style: TextStyle(fontSize: 15)))
+                          child: Text(coord.Night.toString()+" °C", style: TextStyle(fontSize: 15)))
                     ]),
 
                   ],
